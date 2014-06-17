@@ -6,4 +6,13 @@ class User < ActiveRecord::Base
 
 
   has_one :list 
+#  after_create :create_list
+
 end
+
+# private
+
+# def create_list
+#  @list = List.create(user_id: self.id)
+#  redirect_to :action => 'show', :id => @list
+# end
