@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  respond_to :html, :js
+
   def index
     @list = List.find(params[:list_id])
     @items = Item.all
@@ -18,10 +20,9 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @list = current_user.lists.find(params[:list_id])
+    @list = current_user.list
     @item = @list.items.build(item_params)
     @item.list = @list
-    @new_item = Item.new
 
     authorize @item
     if @item.save
@@ -46,7 +47,7 @@ class ItemsController < ApplicationController
     authorize @item
     if @item.update_attributes(item_params)
       flash[:notice] = "Item was updated."
-      redirect_to @item
+      redirect_to @list
     else
       flash[:error] = "There was an error saving the item. Please try again."
       render :edit
@@ -58,19 +59,33 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     description = @item.description
 
-    authorize @item
+    authorize @list
     if @item.destroy
       flash[:notice] = "\"#{description}\" was deleted successfully."
-      redirect_to @list
     else
       flash[:error] = "There was an error deleting the item. Please try again."
-      render :show
+    end
+
+      respond_with(@item) do |f|
+        f.html { redirect_to @list }
     end
   end
-end
 
-private
+  def completed
+    @list = List.find(params[:list_id])
+    @item = Item.find(params[:id])
+    @item.update_attributes(:completed, true)
+    @item.destroy
+  end
 
-def item_params
-  params.require(:item).permit(:description, :list_id)
+  # def days_left
+  #   (Time.now.to_date - item.created_at.to_date).to_i
+  # end
+
+  private
+
+  def item_params
+    params.require(:item).permit(:description, :list_id)
+  end
+
 end

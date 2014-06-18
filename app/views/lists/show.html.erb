@@ -1,11 +1,13 @@
 <h1>My List</h1>
 
-<div>
-  <% @items.each do |item| %>
-    <p><%= link to item.description %> 
-      <%= link_to "Delete Item", [@list, @item], method: :delete, data: { confirm: 'Are you sure you want to delete this item?'} %></p>
-  <% end %>
   <div>
     <%= render partial: "items/form", locals: {list: @list, item: @item} %>
   </div>
-</div>
+
+      <% @items.each do |item| %>
+        <%= content_tag :div, id: "item-#{item.id}" do %>
+          <p><%= item.description %> | Days left: <%= ((Time.now.to_date - item.created_at.to_date).to_i + 7) %></p>
+          <p><%= link_to "Delete Item", [@list, item], method: :delete, remote: true %></p>
+        <% end %>
+        </div>
+      <% end %>

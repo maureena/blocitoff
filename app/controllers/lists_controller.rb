@@ -45,10 +45,19 @@ class ListsController < ApplicationController
       render :edit
     end
   end
-end
 
-private
+  def completed
+    @list = List.find(params[:list_id])
+    @item = Item.find(params[:id])
+    @item.update_attributes(:completed, true)
+    @item.destroy
+  end
 
-def list_params
-  params.require(:list).permit(:title)
+
+  private
+
+  def list_params
+    params.require(:list).permit(:title)
+  end
+
 end

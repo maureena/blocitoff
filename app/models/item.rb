@@ -1,9 +1,10 @@
 class Item < ActiveRecord::Base
   belongs_to :list
 
-  def due_date
-    @list = List.find(params[:list_id])
-    @item = @list.find(params[:id])
 
-  end
+    
+    #self.id will be the item id
+    #self.list will be the list
+    #self will be the item
+    # Item.where("created_at <= ?", Time.now - 7.days)
 end

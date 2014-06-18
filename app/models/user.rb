@@ -14,5 +14,5 @@ end
 
 # def create_list
 #  @list = List.create(user_id: self.id)
-#  redirect_to :action => 'show', :id => @list
+#  redirect_to :action => 'show', :id => @list #navigate only in controllers
 # end
