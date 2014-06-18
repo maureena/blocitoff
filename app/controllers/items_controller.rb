@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
     @list = current_user.list
     @item = @list.items.build(item_params)
     @item.list = @list
+    @item.due_date = Time.now + 7.days
 
     authorize @item
     if @item.save
@@ -78,9 +79,6 @@ class ItemsController < ApplicationController
     @item.destroy
   end
 
-  # def days_left
-  #   (Time.now.to_date - item.created_at.to_date).to_i
-  # end
 
   private
 

@@ -3,11 +3,14 @@
   <div>
     <%= render partial: "items/form", locals: {list: @list, item: @item} %>
   </div>
-
       <% @items.each do |item| %>
         <%= content_tag :div, id: "item-#{item.id}" do %>
-          <p><%= item.description %> | Days left: <%= ((Time.now.to_date - item.created_at.to_date).to_i + 7) %></p>
+          <p><%= item.description %> | <%= item.days_left %> </p>
           <p><%= link_to "Delete Item", [@list, item], method: :delete, remote: true %></p>
+          <%= form_for [@list, item], method: :delete do |f| %>
+            <%= check_box_tag(:completed) %>
+            <%= f.submit "Completed" %>
+          <% end %>
         <% end %>
         </div>
       <% end %>
