@@ -1,0 +1,7 @@
+<div>
+  <%= form_for [@list, @item] do |f| %>
+    <%= f.text_field :description, placeholder: "Create new todo" %>
+
+    <%= f.submit "Add" %>
+  <% end %>
+</div>

@@ -1,3 +1,3 @@
-<%= @items.each do |item| %>
-  <p><%= link_to item.description, item %></p>
+<% @items.each do |item| %>
+  <p><%= link_to item.description, [@list, item] %></p>
 <% end %>
