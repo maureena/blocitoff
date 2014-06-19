@@ -3,4 +3,16 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+
+  has_one :list 
+#  after_create :create_list
+
 end
+
+# private
+
+# def create_list
+#  @list = List.create(user_id: self.id)
+#  redirect_to :action => 'show', :id => @list #navigate only in controllers
+# end
