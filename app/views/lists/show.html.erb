@@ -1,16 +1,33 @@
-<h1>My List</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div><h1>My List</h1></div>
+    <div>
+      <%= render partial: "items/form", locals: {list: @list, item: @item} %>
+    </div>
 
-  <div>
-    <%= render partial: "items/form", locals: {list: @list, item: @item} %>
-  </div>
+    <table class="table">
+      <tr>
+        <th>To-Do</th>
+        <th>Days Left</th>
+        <th colspan="2"></th>
+      </tr>
       <% @items.each do |item| %>
-        <%= content_tag :div, id: "item-#{item.id}" do %>
-          <p><%= item.description %> | <%= item.days_left %> </p>
-          <p><%= link_to "Delete Item", [@list, item], method: :delete, remote: true %></p>
-          <%= form_for [@list, item], method: :delete do |f| %>
-            <%= check_box_tag(:completed) %>
-            <%= f.submit "Completed" %>
-          <% end %>
+      <%= content_tag :tr, id: "item-#{item.id}" do %>
+          <td><%= item.description %></td>
+          <td><%= item.days_left %></td>
+          <td>
+            <%= form_for [@list, item], method: :delete do |f| %>
+             <%= check_box_tag(:completed) %>
+              <%= f.submit "Completed" %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "Delete", [@list, item], method: :delete, remote: true %>
+          </td>
         <% end %>
-        </div>
+        </tr>
       <% end %>
+    </table>
+
+  </div>
+</div>
