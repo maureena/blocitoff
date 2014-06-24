@@ -46,18 +46,11 @@ class ListsController < ApplicationController
     end
   end
 
-  def completed
-    @list = List.find(params[:list_id])
-    @item = Item.find(params[:id])
-    @item.update_attributes(:completed, true)
-    @item.destroy
-  end
-
 
   private
 
   def list_params
-    params.require(:list).permit(:title)
+    params.require(:list).permit(:title, :user_id)
   end
 
 end

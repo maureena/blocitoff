@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe List do
+describe User do
 
     it "has a valid factory" do
-    expect(build(:list)).to be_valid
+    expect(build(:user)).to be_valid
   end
 
 end

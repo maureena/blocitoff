@@ -2,20 +2,14 @@ require 'rails_helper'
 
 describe Item do
 
-  before :each do
-    @item = Item.new :description# more stuff goes here, use factories?
+  it "has a valid factory" do
+    expect(build(:item)).to be_valid
   end
 
-  describe "#new" do
-    it "takes one parameter and returns an Item object" do
-      expect(@item).to be_an_instance_of(Item)
+  describe "#days_left" do
+    it "returns number of days left on item" do
+      item = create(:item)
+      expect(item.days_left).to eq(2)
     end
   end
-
-  describe "#description" do
-    it "returns the correct description" do
-      expect(@item.description).to eql(:description)
-    end
-  end
-
 end
