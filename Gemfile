@@ -21,6 +21,9 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+gem 'bootstrap-sass', '~> 3.1.1'
+
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
@@ -53,9 +56,12 @@ gem 'devise'
 
 gem 'figaro'
 
+gem 'whenever', :require => false
+
 gem 'faker'
 
 gem 'pundit'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
