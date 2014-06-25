@@ -1,18 +1,19 @@
 require 'rails_helper'
+require 'ruby-debug'
 
 describe ListsController do
+
+  before (:each) do
+      user = build_stubbed(:user)
+      sign_in user
+    end
 
 
   describe "GET #index" do
     it "populates an array of lists" do
-      list = create(:list)
+      user = create(:user)
       get :index
-      expect(assigns(:lists)).to eq([list])
-    end
-
-    it "renders the :index view" do
-      get :index
-      expect(response).to render_template(:index)
+      expect(assigns(:lists).length).to eq(1)
     end
   end
 
@@ -35,8 +36,8 @@ describe ListsController do
     end
 
     it "renders the :new template" do
-      get :new
-      expect(response).to render_template(:new)
+      get :new, id: new(:list)
+      expect(subject).to render_template(:new)
     end
   end
 
@@ -54,8 +55,16 @@ describe ListsController do
     end
 
     context "with invalid attributes" do
-      it "does not save the new list to the database"
-      it "renders the :new template"
+      it "does not save the new list to the database" do
+        expect{
+          post :create, list: FactoryGirl.attributes_for(:invalid_list)
+        }.to_not change(List,:count)
+      end
+
+      it "renders the :new template" do
+        post :create, list: FactoryGirl.attributes_for(:invalid_list)
+        expect(response).to render_template(:new)
+      end
     end
   end
 

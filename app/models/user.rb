@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
 
 private
 
- def create_list
+def create_list
   @list = List.create(user_id: self.id)
- end
+end
+
 end

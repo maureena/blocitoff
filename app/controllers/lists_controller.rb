@@ -11,6 +11,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
+    debugger
     authorize @list
     
     if @list.save

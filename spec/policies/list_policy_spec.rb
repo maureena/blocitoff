@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe ListPolicy do
-  let(:record) { build(:list) }
+
   subject { ListPolicy.new(user, record) }
+  let(:record) { build(:list) }
 
   context "for a visitor" do
     let(:user) { nil }
@@ -22,7 +23,8 @@ describe ListPolicy do
   end
 
   context "when record is owned by the user" do
-    let(:record) { build(:list, user: user) }
+    let(:record) { build(:list) }
+    let(:user) { build_stubbed :user }
 
     it { should permit(:show) }
     it { should permit(:update) }
