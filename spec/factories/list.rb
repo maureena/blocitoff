@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :list do
     title "My List"
-    user
+    user 
     end
 
   factory :invalid_list, parent: :list do

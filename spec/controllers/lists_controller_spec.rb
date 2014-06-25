@@ -36,7 +36,7 @@ describe ListsController do
     end
 
     it "renders the :new template" do
-      get :new, id: new(:list)
+      get :new
       expect(subject).to render_template(:new)
     end
   end
@@ -50,7 +50,7 @@ describe ListsController do
       end
       it "redirects to the user's list page" do
         post :create, list: FactoryGirl.attributes_for(:list)
-        expect(response).to redirect_to(List.last)
+        expect(subject).to redirect_to(List.last)
       end
     end
 
