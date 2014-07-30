@@ -15,7 +15,14 @@ group :development do
   gem 'sqlite3'
 end
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
+end
+
 gem 'bootstrap-sass', '~> 3.1.1'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
@@ -55,6 +62,7 @@ gem 'faker'
 
 gem 'pundit'
 
+gem 'debugger'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

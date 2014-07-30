@@ -1,6 +1,7 @@
 class Item < ActiveRecord::Base
   belongs_to :list
 
+  validates :description, length: { minimum: 3 }, presence: true
 
   def days_left
     if self.due_date
@@ -8,8 +9,4 @@ class Item < ActiveRecord::Base
    end
   end
     
-    #self.id will be the item id
-    #self.list will be the list
-    #self will be the item
-    # Item.where("created_at <= ?", Time.now - 7.days)
 end
