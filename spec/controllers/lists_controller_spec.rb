@@ -4,14 +4,13 @@ require 'ruby-debug'
 describe ListsController do
 
   before (:each) do
-      user = build_stubbed(:user)
+      user = create(:user)
       sign_in user
     end
 
 
   describe "GET #index" do
     it "populates an array of lists" do
-      user = create(:user)
       get :index
       expect(assigns(:lists).length).to eq(1)
     end
@@ -45,11 +44,11 @@ describe ListsController do
     context "with valid attributes" do
       it "saves new list to the database" do
         expect{
-          post :create, list: FactoryGirl.attributes_for(:list)
+          post :create, list: { title: "blah", user_id: 2 }
         }.to change(List,:count).by(1)
       end
       it "redirects to the user's list page" do
-        post :create, list: FactoryGirl.attributes_for(:list)
+        post :create, list: { title: "blah", user_id: 2 }
         expect(subject).to redirect_to(List.last)
       end
     end
